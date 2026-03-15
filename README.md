@@ -1,8 +1,16 @@
-# signal-to-brief
+# SIGNAL-TO-BRIEF
 
-**Community pain → structured product briefs.**
+**Community pain → structured product briefs**
 
-signal-to-brief scans Reddit for real frustrations, pulls workarounds and unmet demand, and turns them into structured product briefs — no API keys, paid services, or manual research required.
+Scans Reddit for real frustrations, pulls workarounds and unmet demand, and turns them into structured product briefs — no API keys, paid services, or manual research required.
+
+<table>
+  <tr>
+    <td width="33%"><a href="assets/screenshot-home.png"><img src="assets/screenshot-home.png" alt="Home" /></a></td>
+    <td width="33%"><a href="assets/screenshot-scanning.png"><img src="assets/screenshot-scanning.png" alt="Scanning" /></a></td>
+    <td width="33%"><a href="assets/screenshot-briefs.png"><img src="assets/screenshot-briefs.png" alt="Briefs" /></a></td>
+  </tr>
+</table>
 
 ---
 
@@ -16,15 +24,15 @@ Most Reddit research tools stop at sentiment scores and ranked results. That's r
 
 Each brief contains:
 
-| Field | What it tells you |
-|-------|-------------------|
-| `problem_statement` | The problem in plain user language, not product language |
-| `target_user` | Behavioral description — what they're doing, not who they are |
-| `workaround_evidence` | Exactly what people do instead. This is the validation signal. |
-| `incumbent_gap` | Why existing solutions fail this user specifically |
-| `product_hypothesis` | One-sentence build direction |
-| `validation_questions` | What to verify before committing to build |
-| `signal_strength` | `strong / moderate / weak` — scored by frequency + workaround + subreddit spread |
+| Field                  | What it tells you                                                                |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| `problem_statement`    | The problem in plain user language, not product language                         |
+| `target_user`          | Behavioral description — what they're doing, not who they are                    |
+| `workaround_evidence`  | Exactly what people do instead. This is the validation signal.                   |
+| `incumbent_gap`        | Why existing solutions fail this user specifically                               |
+| `product_hypothesis`   | One-sentence build direction                                                     |
+| `validation_questions` | What to verify before committing to build                                        |
+| `signal_strength`      | `strong / moderate / weak` — scored by frequency + workaround + subreddit spread |
 
 Briefs are sorted strong → moderate → weak.
 

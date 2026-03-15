@@ -16,15 +16,9 @@ Install both free MCP servers before running:
 claude mcp add RivalSearchMCP --url https://RivalSearchMCP.fastmcp.app/mcp
 ```
 
-**Reddit MCP** (deep Reddit — subreddit browsing, hot posts, comments):
+**Reddit MCP Buddy** (deep Reddit — subreddit browsing, hot posts, search, comments):
 ```bash
-# Clone and build
-git clone https://github.com/Hawstein/reddit-mcp-server
-cd reddit-mcp-server && npm install && npm run build
-
-# Add to Claude Code config
-# Add to .claude/mcp_servers.json:
-# { "reddit": { "type": "stdio", "command": "node", "args": ["/path/to/reddit-mcp-server/build/index.js"] } }
+claude mcp add --transport stdio reddit-mcp-buddy -s user -- npx -y reddit-mcp-buddy
 ```
 
 ---

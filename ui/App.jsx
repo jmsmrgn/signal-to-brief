@@ -357,8 +357,8 @@ export default function App() {
         .hero-bg {
           position: fixed; inset: 0; pointer-events: none; z-index: 0;
           background-image:
-            linear-gradient(rgba(13,219,138,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(13,219,138,0.03) 1px, transparent 1px);
+            linear-gradient(rgba(13,219,138,0.12) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(13,219,138,0.12) 1px, transparent 1px);
           background-size: 48px 48px;
         }
 
@@ -372,7 +372,7 @@ export default function App() {
         }
         .wordmark {
           font-family: 'Manrope', sans-serif;
-          font-weight: 800; font-size: 15px;
+          font-weight: 800; font-size: 18px;
           letter-spacing: 0.3em; text-transform: uppercase;
           color: #0ddb8a; margin-bottom: 56px;
           display: flex; align-items: center; gap: 8px;
@@ -403,7 +403,7 @@ export default function App() {
         .text-input {
           width: 100%;
           background: #080e0a;
-          border: 1px solid #102018;
+          border: 1px solid #145536;
           border-radius: 14px;
           padding: 17px 136px 17px 20px;
           font-family: 'Manrope', sans-serif;
@@ -415,13 +415,14 @@ export default function App() {
           border-color: #0ddb8a;
           box-shadow: 0 0 0 3px rgba(13,219,138,0.08);
         }
-        .text-input::placeholder { color: #151e18; }
+        .text-input::placeholder { color: #404040; }
         .scan-btn {
           position: absolute; right: 6px; top: 50%;
           transform: translateY(-50%);
           background: #0ddb8a; color: #070c0a;
           border: none; border-radius: 10px;
           padding: 9px 10px 9px 15px;
+          margin-right: 5px;
           font-family: 'Manrope', sans-serif;
           font-weight: 700; font-size: 16px;
           letter-spacing: 0.08em; cursor: pointer;
@@ -472,8 +473,9 @@ export default function App() {
         .mode-cost {
           font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
           font-weight: 400;
-          font-size: 13px; color: #083a22; letter-spacing: 0.07em;
+          font-size: 13px; color: #c4c4c4; letter-spacing: 0.07em;
           animation: floatIn 0.2s ease both;
+          padding-left: 13px;
         }
 
         /* ── PROCESSING ── */
@@ -756,7 +758,7 @@ export default function App() {
                 onKeyDown={(e) =>
                   e.key === "Enter" && topic.trim() && apiKey.trim() && scan()
                 }
-                placeholder={`e.g. ${EXAMPLES[phIdx]}`}
+                placeholder={`${EXAMPLES[phIdx]}`}
                 autoFocus
               />
               <button

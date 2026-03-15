@@ -1,0 +1,17 @@
+{
+  "name": "signal-to-brief",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite ui",
+    "build": "vite build ui"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.14"
+  }
+}

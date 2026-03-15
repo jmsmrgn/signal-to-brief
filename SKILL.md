@@ -75,7 +75,11 @@ Browse is a secondary pass. Always set `limit: 25` — the default (50) produces
 browse_subreddit(subreddit="[subreddit]", sort="hot", limit=25)
 ```
 
-Run all browse and search calls in parallel across subreddits.
+**Run in two sequential waves to avoid rate limits (10 req/min unauthenticated):**
+1. Wave 1 — run all search calls in parallel. Wait for results.
+2. Wave 2 — run browse calls in parallel after search completes. Limit to 2–3 subreddits max.
+
+If search results are already high-density (strong signal, clear workarounds), skip Wave 2 entirely.
 
 ---
 
@@ -190,7 +194,7 @@ Deliver all strong briefs first, then moderate, then weak. Do not editorialize o
 
 ## Notes
 
-- Stage 2 is the most time-intensive. Cap at 4–6 subreddits per run. Run all browse and search calls in parallel across subreddits.
+- Stage 2 is the most time-intensive. Cap at 4–6 subreddits per run. Run search calls first (Wave 1), then browse as a separate wave (Wave 2) — staggering avoids the 10 req/min unauthenticated rate limit.
 - Search queries return higher-signal results than hot-feed browsing. Always run search first; browse is a secondary confirmation pass.
 - Workaround evidence is the strongest validation signal in the dataset. A community describing a workaround is a community that has already validated demand and found no satisfying solution.
 - Re-run against the same vertical every 4-6 weeks. Signal shifts. What's "no solution" today may have an incumbent next month.

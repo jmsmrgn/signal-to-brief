@@ -545,9 +545,9 @@ export default function App() {
         }
 
         /* ── RESULTS ── */
-        .results-view { min-height: 100vh; }
+        .results-view { min-height: 100vh; max-width: 1800px; margin: 0 auto; }
         .results-header {
-          padding: 28px 36px;
+          padding: 28px clamp(36px, 4vw, 80px);
           border-bottom: 1px solid #0c1610;
           display: flex; align-items: center;
           justify-content: space-between;
@@ -587,7 +587,7 @@ export default function App() {
         }
         .download-btn:hover { border-color: #0ddb8a; color: #0ddb8a; }
         .section {
-          padding: 28px 36px;
+          padding: 28px clamp(36px, 4vw, 80px);
           border-bottom: 1px solid #080e0a;
         }
         .sec-label {
@@ -601,8 +601,8 @@ export default function App() {
         .sec-label.sl-weak { color: #2e4a3c; }
         .cards {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-          gap: 14px;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 16px;
         }
 
         /* ── CARD ── */
@@ -711,6 +711,9 @@ export default function App() {
           .results-header, .section { padding: 20px; }
           .cards { grid-template-columns: 1fr; }
           .headline { font-size: 38px; }
+        }
+        @media (min-width: 1400px) {
+          .cards { gap: 20px; }
         }
       `}</style>
 

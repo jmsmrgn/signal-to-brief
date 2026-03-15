@@ -121,7 +121,7 @@ signal-to-brief/
 
 ## Stack
 
-- Data: [RivalSearchMCP](https://github.com/damionrashford/RivalSearchMCP) + [Reddit MCP Buddy](https://github.com/karanb192/reddit-mcp-buddy) — both free, zero auth
+- Data: [reddit-mcp-buddy](https://github.com/karanb192/reddit-mcp-buddy) (Reddit signal) + [RivalSearchMCP](https://github.com/damionrashford/RivalSearchMCP) (HN, Product Hunt, Dev.to, Medium) — both free, zero auth
 - Model: Claude Sonnet (via Anthropic API or Claude Code)
 - UI: React, no dependencies beyond Anthropic API access
 

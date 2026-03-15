@@ -2,7 +2,7 @@
 
 **Community pain → structured product briefs**
 
-Scans Reddit for real frustrations, pulls workarounds and unmet demand, and turns them into structured product briefs — no API keys, paid services, or manual research required.
+Scans Reddit for real frustrations, pulls workarounds and unmet demand, and turns them into structured product briefs. The Claude Code skill path requires no API key setup beyond your existing Claude access. The web UI path requires an Anthropic API key.
 
 <table>
   <tr>
@@ -42,7 +42,7 @@ Briefs are sorted strong → moderate → weak.
 
 ### Option A — Claude Code skill (recommended)
 
-Install the two free MCP servers that power the data layer:
+No API key setup required beyond your existing Claude Code access. Install the two free MCP servers that power the data layer:
 
 ```bash
 # RivalSearchMCP — Reddit, HN, Product Hunt, Dev.to, Medium
@@ -74,11 +74,15 @@ Use signal-to-brief to find product gaps in the freelance design workflow space
 
 ---
 
-### Option B — Standalone web UI
+### Option B — Hosted web UI (self-deployed)
 
-Drop `signal-to-brief.jsx` into any React environment. The UI calls the Anthropic API directly using web search — no MCP setup required. Bring your own Anthropic API key.
+Deploy your own private instance. Vercel prompts for your API key during setup — it's stored in Vercel's encrypted environment storage and used at build time.
 
-Works as a Claude artifact, in CodeSandbox, or in any React project.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjmsmrgn%2Fsignal-to-brief&env=VITE_ANTHROPIC_API_KEY&envDescription=Your%20Anthropic%20API%20key.%20Stored%20in%20Vercel%2C%20not%20entered%20in%20the%20browser.&envLink=https%3A%2F%2Fconsole.anthropic.com%2Fsettings%2Fkeys)
+
+**Important:** This is a personal deployment. Vite embeds `VITE_*` environment variables into the compiled JS bundle at build time — this is standard practice for private tools, but means the key is readable in the page source. Keep the deployed URL private. Do not share it as a public app where others would use it with your key.
+
+**For local dev and quick demos:** If `VITE_ANTHROPIC_API_KEY` is not set, the UI prompts for the key at runtime. The key lives in component state for the session only — it is never written to localStorage and never sent to any server other than Anthropic's API directly. It is, however, visible in the browser's network tab on every request, which is an inherent limitation of calling an API directly from a browser. Use this path when trying the tool locally or demoing it yourself, not when deploying for others to use with their own keys.
 
 ---
 
@@ -149,13 +153,13 @@ cp .env.example .env
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173). If `VITE_ANTHROPIC_API_KEY` is not set, the UI prompts for the key at runtime — it persists in component state for the session but is never stored.
+Open [http://localhost:5173](http://localhost:5173). For local development, setting the key in `.env` is fine — the dev server is not public-facing. If `VITE_ANTHROPIC_API_KEY` is not set, the UI prompts for the key at runtime; the key lives in component state only and is never written to disk or localStorage.
 
 ---
 
 ## Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/jmsmrgn/signal-to-brief)
+Use the deploy button in the [Option B section](#option-b--hosted-web-ui-self-deployed) above — it pre-fills the env var prompt during Vercel setup. Read the security note there before deploying.
 
 **Manual deploy:**
 
@@ -163,13 +167,9 @@ Open [http://localhost:5173](http://localhost:5173). If `VITE_ANTHROPIC_API_KEY`
 vercel --prod
 ```
 
-Then set your API key in the Vercel dashboard under **Settings → Environment Variables**:
+Set your API key in the Vercel dashboard under **Settings → Environment Variables → `VITE_ANTHROPIC_API_KEY`**. The key will be embedded in the compiled JS bundle — appropriate for a private personal deployment, not for a shared public URL.
 
-```
-VITE_ANTHROPIC_API_KEY = sk-ant-...
-```
-
-> Note: web search capability (`web_search_20250305` tool) must be enabled on your API key for the extraction stage to work. Check your Anthropic console under API settings.
+> Note: web search capability (`web_search_20250305` tool) must be enabled on your API key for the live extraction stage to work. Check your Anthropic console under API settings.
 
 ---
 

@@ -110,6 +110,10 @@ function BriefCard({ brief, globalIdx, copiedIdx, onCopy }) {
       <p className="problem">{brief.problem_statement}</p>
 
       <div className="field">
+        <span className="fkey">Signal</span>
+        <span className="fval">{brief.frequency_signal} · {brief.raw_signal_count} instances found</span>
+      </div>
+      <div className="field">
         <span className="fkey">Who</span>
         <span className="fval">{brief.target_user}</span>
       </div>

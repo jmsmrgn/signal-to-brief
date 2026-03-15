@@ -48,9 +48,8 @@ Install the two free MCP servers that power the data layer:
 # RivalSearchMCP — Reddit, HN, Product Hunt, Dev.to, Medium
 claude mcp add RivalSearchMCP --url https://RivalSearchMCP.fastmcp.app/mcp
 
-# Reddit MCP — deep subreddit access, hot posts, comments
-git clone https://github.com/Hawstein/reddit-mcp-server
-cd reddit-mcp-server && npm install && npm run build
+# Reddit MCP Buddy — deep subreddit access, hot posts, search, comments
+claude mcp add --transport stdio reddit-mcp-buddy -s user -- npx -y reddit-mcp-buddy
 ```
 
 Add the skill:
@@ -122,7 +121,7 @@ signal-to-brief/
 
 ## Stack
 
-- Data: [RivalSearchMCP](https://github.com/damionrashford/RivalSearchMCP) + [Reddit MCP](https://github.com/Hawstein/reddit-mcp-server) — both free, zero auth
+- Data: [RivalSearchMCP](https://github.com/damionrashford/RivalSearchMCP) + [Reddit MCP Buddy](https://github.com/karanb192/reddit-mcp-buddy) — both free, zero auth
 - Model: Claude Sonnet (via Anthropic API or Claude Code)
 - UI: React, no dependencies beyond Anthropic API access
 

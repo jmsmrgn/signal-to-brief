@@ -27,13 +27,13 @@ claude mcp add --transport stdio reddit-mcp-buddy -s user -- npx -y reddit-mcp-b
 
 ### Stage 1: Subreddit Mapping
 
-Given a topic/vertical, derive the 6-10 most signal-rich subreddits. Prioritize communities where users self-report problems, not communities where users discuss the topic academically.
+Given a topic/vertical, derive the 4-6 most signal-rich subreddits. Prioritize communities where users self-report problems, not communities where users discuss the topic academically.
 
 **Prompt template:**
 ```
 Topic: [USER_TOPIC]
 
-Identify 6-10 subreddits where people who experience this problem domain are most likely to:
+Identify 4-6 subreddits where people who experience this problem domain are most likely to:
 - Complain about specific failures
 - Ask for help with workarounds
 - Share frustrating experiences
@@ -47,20 +47,45 @@ Exclude: news/discussion subreddits where users analyze the topic rather than li
 
 ### Stage 2: Signal Ingestion
 
-For each subreddit in the map, pull signal using both MCP servers. Target posts and comments containing high-frustration language.
+Pull signal using both MCP servers in parallel. They have distinct roles — do not use them interchangeably.
 
-**RivalSearchMCP queries to run (run all, one per subreddit):**
+**MCP division of labor:**
+- **reddit-mcp-buddy** — all Reddit signal. Use this for every Reddit query.
+- **RivalSearchMCP** — cross-platform only: Hacker News, Product Hunt, Dev.to, Medium. Do not run RivalSearchMCP against Reddit subreddits — it duplicates reddit-mcp-buddy at extra cost.
+
+---
+
+**reddit-mcp-buddy — search first, browse second:**
+
+Search produces higher-signal results than hot-feed browsing. Run 2–3 targeted queries with pain language before any browse calls. Keep subreddits to **2 per search call** — larger batches fail silently with no partial result.
+
 ```
-"[topic] frustrating site:reddit.com/r/[subreddit]"
-"[topic] wish there was site:reddit.com/r/[subreddit]"
-"[topic] anyone else hate site:reddit.com/r/[subreddit]"
-"[topic] workaround site:reddit.com/r/[subreddit]"
+search_reddit(
+  query="[pain language] [topic]",
+  subreddits=["sub1", "sub2"],
+  sort="top",
+  time="year",
+  limit=25
+)
 ```
 
-**Reddit MCP queries to run:**
+Browse is a secondary pass. Always set `limit: 25` — the default (50) produces outputs too large to read in a single pass.
+
 ```
-Get hot posts from r/[subreddit] — scan titles for pain language
-Get top comments on high-engagement posts — workaround descriptions live here
+browse_subreddit(subreddit="[subreddit]", sort="hot", limit=25)
+```
+
+Run all browse and search calls in parallel across subreddits.
+
+---
+
+**RivalSearchMCP — cross-platform signal (optional, strongest for B2B verticals):**
+
+```
+social_search(
+  query="[topic] [pain language]",
+  platforms=["hackernews", "devto", "producthunt"]
+)
 ```
 
 **Signal language to flag and collect:**
@@ -159,7 +184,8 @@ Deliver all strong briefs first, then moderate, then weak. Do not editorialize o
 
 ## Notes
 
-- Stage 2 is the most time-intensive. For broad topics, cap at 5 subreddits per run to keep output quality high.
+- Stage 2 is the most time-intensive. Cap at 4–6 subreddits per run. Run all browse and search calls in parallel across subreddits.
+- Search queries return higher-signal results than hot-feed browsing. Always run search first; browse is a secondary confirmation pass.
 - Workaround evidence is the strongest validation signal in the dataset. A community describing a workaround is a community that has already validated demand and found no satisfying solution.
 - Re-run against the same vertical every 4-6 weeks. Signal shifts. What's "no solution" today may have an incumbent next month.
 - For B2B verticals, supplement Reddit with Hacker News via RivalSearchMCP — HN comments on relevant Show HN posts are dense with product feedback.

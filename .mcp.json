@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "reddit": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "reddit-mcp-server"
+      ],
+      "env": {}
+    }
+  }
+}

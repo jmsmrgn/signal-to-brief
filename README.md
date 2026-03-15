@@ -46,7 +46,7 @@ Install the two free MCP servers that power the data layer:
 
 ```bash
 # RivalSearchMCP — Reddit, HN, Product Hunt, Dev.to, Medium
-claude mcp add RivalSearchMCP --url https://RivalSearchMCP.fastmcp.app/mcp
+claude mcp add --transport http RivalSearchMCP https://RivalSearchMCP.fastmcp.app/mcp
 
 # Reddit MCP Buddy — deep subreddit access, hot posts, search, comments
 claude mcp add --transport stdio reddit-mcp-buddy -s user -- npx -y reddit-mcp-buddy

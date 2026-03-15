@@ -13,7 +13,7 @@ Install both free MCP servers before running:
 
 **RivalSearchMCP** (Reddit + HN + Product Hunt + Dev.to + Medium):
 ```bash
-claude mcp add RivalSearchMCP --url https://RivalSearchMCP.fastmcp.app/mcp
+claude mcp add --transport http RivalSearchMCP https://RivalSearchMCP.fastmcp.app/mcp
 ```
 
 **Reddit MCP Buddy** (deep Reddit — subreddit browsing, hot posts, search, comments):

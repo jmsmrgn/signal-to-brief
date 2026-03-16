@@ -74,6 +74,34 @@ Use signal-to-brief to find product gaps in the freelance design workflow space
 
 ---
 
+### Option A (Gemini CLI)
+
+Gemini CLI is also supported. Add the MCP servers to `~/.gemini/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "reddit-mcp-buddy": {
+      "command": "npx",
+      "args": ["-y", "reddit-mcp-buddy"]
+    },
+    "RivalSearchMCP": {
+      "url": "https://RivalSearchMCP.fastmcp.app/mcp"
+    }
+  }
+}
+```
+
+Install the skill:
+
+```bash
+gemini skills install https://github.com/jmsmrgn/signal-to-brief
+```
+
+Then trigger with the same natural language prompts. Tool name mappings and Gemini-specific config live in [`GEMINI.md`](GEMINI.md).
+
+---
+
 ### Option B — Hosted web UI (self-deployed)
 
 Deploy your own private instance. Vercel prompts for your API key during setup — it's stored in Vercel's encrypted environment storage and used at build time.

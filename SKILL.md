@@ -149,7 +149,7 @@ Return as JSON array.
 Before rendering output, check what write tools are available — in this priority order:
 
 - **mcp__obsidian__write_note available:** Write briefs to the vault at `signal-to-brief/briefs/[topic-slug]-[YYYY-MM-DD].md`. Confirm the vault path to the user after writing. Do not print the full briefs to chat.
-- **Write tool available (Claude Code, no Obsidian MCP):** Write briefs to a markdown file in the current working directory. Filename: `signal-brief-[topic-slug]-[YYYY-MM-DD].md`. Confirm the file path to the user after writing. Do not print the full briefs to chat.
+- **Write tool (Claude Code) or write_file tool (Gemini CLI) available, no Obsidian MCP:** Write briefs to a markdown file in the current working directory. Filename: `signal-brief-[topic-slug]-[YYYY-MM-DD].md`. Confirm the file path to the user after writing. Do not print the full briefs to chat.
 - **Neither available:** Render briefs directly in chat as a structured list.
 
 The markdown file format for each brief:

@@ -164,7 +164,7 @@ No paid data services required. No API keys beyond your existing Anthropic acces
 ## Limitations
 
 - Works best in verticals where practitioners complain publicly — active subreddits where people describe real workflows, not communities that just discuss the topic from the outside.
-- Web search variant (UI) pulls from indexed Reddit content — not real-time. MCP variant (Claude Code) has deeper access.
+- The UI runs in two modes: **standard** (Claude uses training knowledge — fast but not real-time) and **live** (Anthropic's web search tool — real-time, but web crawl rather than API access). The MCP skill (Claude Code / Gemini CLI) has the deepest access: structured Reddit API queries, sort/time filters, and comment-level data via reddit-mcp-buddy.
 - The workaround evidence field will sometimes return "none documented" — this means validate before proceeding, not that no demand exists.
 - Re-run against the same vertical every 4–6 weeks. Signal shifts.
 

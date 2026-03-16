@@ -102,7 +102,11 @@ social_search(
 - "I pay for [X] but it still doesn't..."
 - "Every time I have to [task] I want to..."
 
-Collect raw signal as a list: [source, quote/paraphrase, upvotes/engagement indicator]
+Collect raw signal in this format — consistent structure feeds Stage 3 cleanly:
+- [r/subreddit · ~N upvotes] "exact quote or close paraphrase"
+- [HN/Dev.to/etc · N points] "quote or paraphrase"
+
+One line per signal instance. Keep the source tag and engagement count — Stage 3 uses them to score frequency and validate cross-community spread.
 
 ---
 
@@ -194,8 +198,6 @@ Deliver all strong briefs first, then moderate, then weak. Do not editorialize o
 
 ## Notes
 
-- Stage 2 is the most time-intensive. Cap at 4–6 subreddits per run. Run search calls first (Wave 1), then browse as a separate wave (Wave 2) — staggering avoids the 10 req/min unauthenticated rate limit.
-- Search queries return higher-signal results than hot-feed browsing. Always run search first; browse is a secondary confirmation pass.
 - Workaround evidence is the strongest validation signal in the dataset. A community describing a workaround is a community that has already validated demand and found no satisfying solution.
-- Re-run against the same vertical every 4-6 weeks. Signal shifts. What's "no solution" today may have an incumbent next month.
+- Re-run against the same vertical every 4–6 weeks. Signal shifts. What's "no solution" today may have an incumbent next month.
 - For B2B verticals, supplement Reddit with Hacker News via RivalSearchMCP — HN comments on relevant Show HN posts are dense with product feedback.

@@ -262,7 +262,7 @@ export default function App() {
 
   const SIGNAL_EMOJI = { strong: "🟢", moderate: "🟡", weak: "⚫" };
 
-  const downloadAll = () => {
+  const downloadAll = async () => {
     const renderBrief = (b) =>
       [
         `## ${b.problem_statement} ${SIGNAL_EMOJI[b.signal_strength] || "⚫"}`,
@@ -294,15 +294,33 @@ export default function App() {
       `---`,
     ].join("\n");
 
-    const body = [...strong, ...moderate, ...weak]
-      .map(renderBrief)
-      .join("\n\n---\n\n");
+    const content = `${header}\n\n${[...strong, ...moderate, ...weak].map(renderBrief).join("\n\n---\n\n")}`;
+    const filename = `signal-to-brief-${slug}-${date}.md`;
 
-    const blob = new Blob([`${header}\n\n${body}`], { type: "text/markdown" });
+    // iOS Safari, Chrome, Brave, and all WebKit browsers ignore the `download`
+    // attribute on blob URLs. Use the Web Share API (file sharing) when available —
+    // this surfaces the native share sheet on every iOS browser. Fall through to
+    // the standard blob download on desktop and Android.
+    const file = new File([content], filename, { type: "text/plain" });
+    if (
+      typeof navigator.share === "function" &&
+      typeof navigator.canShare === "function" &&
+      navigator.canShare({ files: [file] })
+    ) {
+      try {
+        await navigator.share({ files: [file] });
+        return;
+      } catch (e) {
+        if (e.name === "AbortError") return;
+        // Non-cancel error: fall through to blob download
+      }
+    }
+
+    const blob = new Blob([content], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `signal-to-brief-${slug}-${date}.md`;
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
